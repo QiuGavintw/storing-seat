@@ -116,7 +116,7 @@ p { margin: 0; }
 .below-chart {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
+  gap: 0;
   align-items: start;
 }
 
@@ -288,6 +288,10 @@ body.dark .badge { background: rgba(255,255,255,0.06); }
 .history-list { display: flex; flex-direction: column; gap: 8px; max-height: 260px; overflow: auto; }
 .history-item { border: 1px solid var(--line); border-radius: 8px; padding: 8px; display: flex; justify-content: space-between; gap: 8px; align-items: center; background: var(--surface-alt); }
 .history-item .meta { font-size: 0.8rem; color: var(--muted); }
+.help-list { margin: 0; padding-left: 1.2em; color: var(--ink); font-size: 0.9rem; line-height: 1.6; }
+.help-list li { margin-bottom: 6px; }
+.help-list li:last-child { margin-bottom: 0; }
+.help-list code { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: 0.88em; background: var(--surface-alt); border: 1px solid var(--line); border-radius: 4px; padding: 0 4px; }
 
 .context-menu { position: fixed; z-index: 50; background: var(--surface); border: 1px solid var(--line-strong); border-radius: 8px; min-width: 170px; box-shadow: 0 10px 24px rgba(43,42,40,0.18); padding: 4px; }
 .context-menu button { width: 100%; text-align: left; border: none; border-radius: 6px; padding: 7px 9px; background: transparent; }
