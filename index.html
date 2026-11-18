@@ -78,125 +78,129 @@
       </section>
 
       <div class="below-chart">
-        <section class="card">
-          <div class="card-head"><h2>教室佈局</h2></div>
-          <div class="grid-2">
-            <label>行數<input type="number" id="rowsInput" min="1" max="20" value="5"></label>
-            <label>列數<input type="number" id="colsInput" min="1" max="20" value="6"></label>
-          </div>
-          <label class="inline"><input type="checkbox" id="showBlackboard" checked> 顯示黑板（上方）</label>
-          <label class="inline"><input type="checkbox" id="showTeacherDesk" checked> 顯示教師桌</label>
-          <label>教師桌位置
-            <select id="teacherDeskPos">
-              <option value="left">靠左</option>
-              <option value="center" selected>置中</option>
-              <option value="right">靠右</option>
-            </select>
-          </label>
-          <div class="hint">格子類型可設為一般座位、講台或空區/禁用；編排時會保留鎖定座位。</div>
-        </section>
-
-        <section class="card">
-          <div class="card-head"><h2>學生名單</h2></div>
-          <div class="tabs" id="nameTabs">
-            <button data-tab="paste" class="tab active">貼上文字</button>
-            <button data-tab="file" class="tab">匯入檔案</button>
-            <button data-tab="manual" class="tab">手動新增</button>
-          </div>
-          <div class="tab-pane active" data-pane="paste">
-            <label>貼上 CSV 名單<textarea id="pasteInput" rows="7" placeholder="學號,中文名,性別,前後需求,組別,備註,固定座位,限制標記&#10;1,王小明,男,前排,1,,,&quot;A!!&quot;"></textarea></label>
-            <div class="inline-actions">
-              <button id="importPasteBtn">匯入貼上名單</button>
-              <button id="downloadSampleCsvBtn" class="secondary">下載範例 CSV</button>
-              <button id="downloadSampleExcelBtn" class="secondary">下載範例 Excel</button>
-            </div>
-          </div>
-          <div class="tab-pane" data-pane="file">
-            <label>上傳 CSV / Excel<input type="file" id="fileInput" accept=".csv,.txt,.xlsx,.xls"></label>
-            <div class="inline-actions">
-              <button id="importFileBtn">讀取檔案</button>
-              <button id="downloadSampleCsvBtn2" class="secondary">下載範例 CSV</button>
-              <button id="downloadSampleExcelBtn2" class="secondary">下載範例 Excel</button>
-            </div>
-            <div class="hint">欄位：學號、中文名、性別、前後需求、組別、備註、固定座位、限制標記。</div>
-          </div>
-          <div class="tab-pane" data-pane="manual">
+        <div class="below-col">
+          <section class="card">
+            <div class="card-head"><h2>教室佈局</h2></div>
             <div class="grid-2">
-              <label>學號<input id="mNumber"></label>
-              <label>中文名<input id="mName"></label>
-              <label>性別<select id="mGender"><option value="">不填</option><option>男</option><option>女</option><option>其他</option></select></label>
-              <label>前後需求<select id="mFrontBack"><option>不指定</option><option>前排</option><option>後排</option></select></label>
-              <label>組別<input id="mGroup"></label>
-              <label>固定座位<input id="mFixed" placeholder="例: R1C2"></label>
+              <label>行數<input type="number" id="rowsInput" min="1" max="20" value="5"></label>
+              <label>列數<input type="number" id="colsInput" min="1" max="20" value="6"></label>
             </div>
-            <label>備註<input id="mNote"></label>
-            <label>限制標記<input id="mRestrict" placeholder="例: A!!（相同代碼分開，! 越多越遠）"></label>
-            <button id="addStudentBtn">新增學生</button>
-          </div>
-          <div class="student-list-wrap">
-            <div class="list-header"><span>學生清單</span><button id="clearStudentsBtn" class="danger small">清空名單</button></div>
-            <div id="studentTableWrap" class="table-wrap"></div>
-          </div>
-        </section>
+            <label class="inline"><input type="checkbox" id="showBlackboard" checked> 顯示黑板（上方）</label>
+            <label class="inline"><input type="checkbox" id="showTeacherDesk" checked> 顯示教師桌</label>
+            <label>教師桌位置
+              <select id="teacherDeskPos">
+                <option value="left">靠左</option>
+                <option value="center" selected>置中</option>
+                <option value="right">靠右</option>
+              </select>
+            </label>
+            <div class="hint">格子類型可設為一般座位、講台或空區/禁用；編排時會保留鎖定座位。</div>
+          </section>
 
-        <section class="card">
-          <div class="card-head"><h2>排位規則</h2></div>
-          <label>基底排列模式
-            <select id="modeSelect">
-              <option value="random">隨機排列</option>
-              <option value="id_asc">依學號遞增</option>
-              <option value="id_desc">依學號遞減</option>
-              <option value="name_asc">依姓名遞增</option>
-              <option value="name_desc">依姓名遞減</option>
-            </select>
-          </label>
-          <label>填入方向
-            <select id="fillOrderSelect">
-              <option value="row_lr">依序橫排（左→右，每排往下）</option>
-              <option value="row_rl">依序橫排（右→左，每排往下）</option>
-              <option value="row_snake_lr">S 型橫排（左起蛇形）</option>
-              <option value="row_snake_rl">S 型橫排（右起蛇形）</option>
-              <option value="col_tb">依序直排（上→下，每列往右）</option>
-              <option value="col_bt">依序直排（下→上，每列往右）</option>
-              <option value="col_snake_tb">S 型直排（上起蛇形）</option>
-              <option value="col_snake_bt">S 型直排（下起蛇形）</option>
-            </select>
-          </label>
-          <div class="grid-2">
-            <label>前排排數<input type="number" id="frontRows" min="0" value="2"></label>
-            <label>後排排數<input type="number" id="backRows" min="0" value="2"></label>
-          </div>
-          <label class="inline"><input type="checkbox" id="genderMix"> 男女盡量間隔</label>
-          <label class="inline"><input type="checkbox" id="groupMix" checked> 分組平均分散且避免同組相鄰</label>
-          <div class="rule-actions">
-            <button id="separationRulesBtn">管理分開規則</button>
-          </div>
-          <div class="hint">優先順序：鎖定/固定 &gt; 不可排位區塊 &gt; 特殊需求（前後、分開、分組）&gt; 男女間隔 &gt; 基底排列。</div>
-        </section>
+          <section class="card">
+            <div class="card-head"><h2>排位規則</h2></div>
+            <label>基底排列模式
+              <select id="modeSelect">
+                <option value="random">隨機排列</option>
+                <option value="id_asc">依學號遞增</option>
+                <option value="id_desc">依學號遞減</option>
+                <option value="name_asc">依姓名遞增</option>
+                <option value="name_desc">依姓名遞減</option>
+              </select>
+            </label>
+            <label>填入方向
+              <select id="fillOrderSelect">
+                <option value="row_lr">依序橫排（左→右，每排往下）</option>
+                <option value="row_rl">依序橫排（右→左，每排往下）</option>
+                <option value="row_snake_lr">S 型橫排（左起蛇形）</option>
+                <option value="row_snake_rl">S 型橫排（右起蛇形）</option>
+                <option value="col_tb">依序直排（上→下，每列往右）</option>
+                <option value="col_bt">依序直排（下→上，每列往右）</option>
+                <option value="col_snake_tb">S 型直排（上起蛇形）</option>
+                <option value="col_snake_bt">S 型直排（下起蛇形）</option>
+              </select>
+            </label>
+            <div class="grid-2">
+              <label>前排排數<input type="number" id="frontRows" min="0" value="2"></label>
+              <label>後排排數<input type="number" id="backRows" min="0" value="2"></label>
+            </div>
+            <label class="inline"><input type="checkbox" id="genderMix"> 男女盡量間隔</label>
+            <label class="inline"><input type="checkbox" id="groupMix" checked> 分組平均分散且避免同組相鄰</label>
+            <div class="rule-actions">
+              <button id="separationRulesBtn">管理分開規則</button>
+            </div>
+            <div class="hint">優先順序：鎖定/固定 &gt; 不可排位區塊 &gt; 特殊需求（前後、分開、分組）&gt; 男女間隔 &gt; 基底排列。</div>
+          </section>
 
-        <section class="card">
-          <div class="card-head"><h2>統計</h2></div>
-          <div id="statsBox" class="stats"></div>
-        </section>
+          <section class="card">
+            <div class="card-head"><h2>編排歷史</h2></div>
+            <div class="history-actions">
+              <button id="saveHistoryBtn">儲存目前版本</button>
+            </div>
+            <div id="historyList" class="history-list"></div>
+          </section>
+        </div>
 
-        <section class="card">
-          <div class="card-head"><h2>編排歷史</h2></div>
-          <div class="history-actions">
-            <button id="saveHistoryBtn">儲存目前版本</button>
-          </div>
-          <div id="historyList" class="history-list"></div>
-        </section>
+        <div class="below-col">
+          <section class="card">
+            <div class="card-head"><h2>學生名單</h2></div>
+            <div class="tabs" id="nameTabs">
+              <button data-tab="paste" class="tab active">貼上文字</button>
+              <button data-tab="file" class="tab">匯入檔案</button>
+              <button data-tab="manual" class="tab">手動新增</button>
+            </div>
+            <div class="tab-pane active" data-pane="paste">
+              <label>貼上 CSV 名單<textarea id="pasteInput" rows="7" placeholder="學號,中文名,性別,前後需求,組別,備註,固定座位,限制標記&#10;1,王小明,男,前排,1,,,&quot;A!!&quot;"></textarea></label>
+              <div class="inline-actions">
+                <button id="importPasteBtn">匯入貼上名單</button>
+                <button id="downloadSampleCsvBtn" class="secondary">下載範例 CSV</button>
+                <button id="downloadSampleExcelBtn" class="secondary">下載範例 Excel</button>
+              </div>
+            </div>
+            <div class="tab-pane" data-pane="file">
+              <label>上傳 CSV / Excel<input type="file" id="fileInput" accept=".csv,.txt,.xlsx,.xls"></label>
+              <div class="inline-actions">
+                <button id="importFileBtn">讀取檔案</button>
+                <button id="downloadSampleCsvBtn2" class="secondary">下載範例 CSV</button>
+                <button id="downloadSampleExcelBtn2" class="secondary">下載範例 Excel</button>
+              </div>
+              <div class="hint">欄位：學號、中文名、性別、前後需求、組別、備註、固定座位、限制標記。</div>
+            </div>
+            <div class="tab-pane" data-pane="manual">
+              <div class="grid-2">
+                <label>學號<input id="mNumber"></label>
+                <label>中文名<input id="mName"></label>
+                <label>性別<select id="mGender"><option value="">不填</option><option>男</option><option>女</option><option>其他</option></select></label>
+                <label>前後需求<select id="mFrontBack"><option>不指定</option><option>前排</option><option>後排</option></select></label>
+                <label>組別<input id="mGroup"></label>
+                <label>固定座位<input id="mFixed" placeholder="例: R1C2"></label>
+              </div>
+              <label>備註<input id="mNote"></label>
+              <label>限制標記<input id="mRestrict" placeholder="例: A!!（相同代碼分開，! 越多越遠）"></label>
+              <button id="addStudentBtn">新增學生</button>
+            </div>
+            <div class="student-list-wrap">
+              <div class="list-header"><span>學生清單</span><button id="clearStudentsBtn" class="danger small">清空名單</button></div>
+              <div id="studentTableWrap" class="table-wrap"></div>
+            </div>
+          </section>
 
-        <section class="card">
-          <div class="card-head"><h2>使用說明</h2></div>
-          <ol class="help-list">
-            <li><b>設定教室</b>：於「教室佈局」調整行列數、黑板與教師桌位置。點選座位格可切換一般座位／講台／空區禁用。</li>
-            <li><b>匯入名單</b>：可貼上 CSV、上傳 CSV/Excel，或手動新增。支援欄位：學號、中文名、性別、前後需求、組別、備註、固定座位、限制標記；可先下載範例檔。</li>
-            <li><b>設定規則</b>：選擇基底排列與填入方向，設定前後排排數、男女間隔、分組分散，並可管理分開規則。限制標記可用 <code>A!</code>、<code>A!!</code> 等（相同代碼需分開，驚嘆號越多分得越遠）。</li>
-            <li><b>排座與調整</b>：按側邊「🎲 抽號編排座位」產生座位；可拖曳交換、右鍵鎖定/禁用/指派學生，支援復原重做與儲存編排歷史版本。</li>
-            <li><b>檢視與輸出</b>：可調整座位圖字級、放大座位圖或全螢幕檢視；並可匯出/匯入 JSON、匯出名單 CSV、匯出 PNG 或列印/存 PDF。資料會自動儲存在本機瀏覽器。</li>
-          </ol>
-        </section>
+          <section class="card">
+            <div class="card-head"><h2>統計</h2></div>
+            <div id="statsBox" class="stats"></div>
+          </section>
+
+          <section class="card">
+            <div class="card-head"><h2>使用說明</h2></div>
+            <ol class="help-list">
+              <li><b>設定教室</b>：於「教室佈局」調整行列數、黑板與教師桌位置。點選座位格可切換一般座位／講台／空區禁用。</li>
+              <li><b>匯入名單</b>：可貼上 CSV、上傳 CSV/Excel，或手動新增。支援欄位：學號、中文名、性別、前後需求、組別、備註、固定座位、限制標記；可先下載範例檔。</li>
+              <li><b>設定規則</b>：選擇基底排列與填入方向，設定前後排排數、男女間隔、分組分散，並可管理分開規則。限制標記可用 <code>A!</code>、<code>A!!</code> 等（相同代碼需分開，驚嘆號越多分得越遠）。</li>
+              <li><b>排座與調整</b>：按側邊「🎲 抽號編排座位」產生座位；可拖曳交換、右鍵鎖定/禁用/指派學生，支援復原重做與儲存編排歷史版本。</li>
+              <li><b>檢視與輸出</b>：可調整座位圖字級、放大座位圖或全螢幕檢視；並可匯出/匯入 JSON、匯出名單 CSV、匯出 PNG 或列印/存 PDF。資料會自動儲存在本機瀏覽器。</li>
+            </ol>
+          </section>
+        </div>
       </div>
     </section>
   </main>
